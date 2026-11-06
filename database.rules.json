@@ -1,0 +1,55 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "allow": {
+      "$key": {
+        ".read": "auth != null && auth.token.email_verified == true && auth.token.email.toLowerCase().replace('.', ',') == $key"
+      }
+    },
+
+    "users": {
+      ".read": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()",
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()"
+      }
+    },
+
+    "presence": {
+      ".read": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()",
+      "$uid": {
+        ".write": "auth != null && auth.uid == $uid && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()"
+      }
+    },
+
+    "chat": {
+      "$channel": {
+        ".read": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()",
+        ".indexOn": ["t"],
+        "$msg": {
+          ".write": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists() && ((!data.exists() && newData.child('uid').val() == auth.uid && newData.child('t').val() <= now && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 300) || (data.exists() && !newData.exists() && (data.child('uid').val() == auth.uid || data.child('t').val() < now - 2592000000)))"
+        }
+      }
+    },
+
+    "dm": {
+      "$pair": {
+        ".read": "auth != null && $pair.contains(auth.uid) && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()",
+        ".indexOn": ["t"],
+        "$msg": {
+          ".write": "auth != null && $pair.contains(auth.uid) && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists() && ((!data.exists() && newData.child('uid').val() == auth.uid && newData.child('t').val() <= now && newData.child('text').isString() && newData.child('text').val().length > 0 && newData.child('text').val().length <= 300) || (data.exists() && !newData.exists() && data.child('t').val() < now - 2592000000))"
+        }
+      }
+    },
+
+    "inbox": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        "$other": {
+          ".write": "auth != null && (auth.uid == $uid || auth.uid == $other) && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()"
+        }
+      }
+    }
+  }
+}

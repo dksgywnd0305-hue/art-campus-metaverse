@@ -1,3 +1,10 @@
 {
-  "sheetCsvUrl": ""
+  "sheetCsvUrl": "",
+  "firebase": {
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "projectId": "",
+    "appId": ""
+  }
 }

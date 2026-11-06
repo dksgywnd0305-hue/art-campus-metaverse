@@ -1,0 +1,4 @@
+# 직원 개인정보가 담긴 파일은 올리지 않기
+*.xlsx
+allow_import.json
+*명단*

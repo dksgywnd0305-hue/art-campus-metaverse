@@ -133,6 +133,49 @@ kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 
 .msg{font-size:13px;min-height:18px;color:var(--accent)}
 .m-body h3{margin:6px 0 0;font-size:15px}
 
+.cr-sec{font-family:var(--font-display);font-size:18px;color:var(--text);padding-top:6px;border-top:1px solid var(--line);margin-top:2px}
+.preset-note{margin:0;padding:10px 12px;border-radius:10px;background:rgba(255,201,77,.14);border:1px solid rgba(255,201,77,.4);font-size:13px;line-height:1.55;color:#ffe3a3}
+
+/* ---------- 로그인 ---------- */
+.gate{position:fixed;inset:0;display:grid;place-items:center;padding:16px;z-index:6}
+.gate-card{width:min(420px,100%);background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 28px;display:flex;flex-direction:column;gap:12px;backdrop-filter:blur(10px)}
+.gate-card h1{margin:0;font-family:var(--font-display);font-weight:400;font-size:34px}
+.gate-card .sub{margin:0 0 6px;color:var(--muted);font-size:14px;line-height:1.6}
+
+/* ---------- 이모트 ---------- */
+.emotes{position:absolute;right:16px;bottom:16px;display:flex;gap:4px;padding:6px}
+.emotes button{border:0;background:rgba(255,255,255,.07);border-radius:9px;padding:7px 10px;font-size:13px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.emotes button:hover{background:rgba(255,255,255,.15)}
+.emotes kbd{min-width:20px;height:20px;font-size:11px}
+.emote-btn{position:absolute;right:122px;bottom:100px;width:58px;height:58px;border-radius:50%;border:1px solid var(--line);background:var(--panel);font-size:13px}
+
+/* ---------- 채팅 ---------- */
+.chat{position:absolute;left:16px;bottom:16px;width:350px;height:300px;display:flex;flex-direction:column;overflow:hidden}
+.chat-head{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 0 6px}
+.chat-tabs{display:flex;gap:2px}
+.chat-tabs button{border:0;background:transparent;padding:8px 11px;border-radius:9px 9px 0 0;font-size:13px;color:var(--muted);cursor:pointer;display:flex;gap:5px;align-items:center}
+.chat-tabs button[aria-selected="true"]{background:rgba(255,255,255,.08);color:var(--text);font-weight:700}
+.chat-tabs b,.badge{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#ff5d6c;color:#fff;font-size:11px;display:inline-grid;place-items:center}
+.chat-tabs b:empty,.badge:empty{display:none}
+.chat-min{border:0;background:rgba(255,255,255,.08);width:28px;height:28px;border-radius:8px;cursor:pointer}
+.dm-bar{display:flex;gap:4px;padding:6px 8px;overflow-x:auto;border-bottom:1px solid var(--line);flex:0 0 auto}
+.dm-bar button{flex:0 0 auto;border:1px solid var(--line);background:rgba(255,255,255,.05);border-radius:999px;padding:5px 10px;font-size:12px;cursor:pointer;display:flex;gap:4px;align-items:center}
+.dm-bar button[aria-pressed="true"]{background:var(--text);color:var(--ink);font-weight:700}
+.chat-log{flex:1;overflow-y:auto;list-style:none;margin:0;padding:8px 12px;display:flex;flex-direction:column;gap:5px;font-size:13.5px;line-height:1.45;background:rgba(255,255,255,.03)}
+.chat-log li{word-break:break-word}
+.chat-log li b{margin-right:6px}
+.chat-log li time{color:#7d8296;font-size:11px;margin-left:6px}
+.chat-log li.sys{color:var(--muted);font-size:12.5px}
+.chat-form{display:flex;gap:6px;padding:8px}
+.chat-form input{flex:1;min-width:0;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit;font-size:14px;color:var(--text)}
+.chat-open{position:absolute;left:16px;bottom:16px;padding:10px 16px;border-radius:12px;display:flex;gap:6px;align-items:center;cursor:pointer;font-weight:700;font-size:14px}
+.people{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.person{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04)}
+.person .on{width:10px;height:10px;border-radius:50%;background:#6bdc8a;box-shadow:0 0 0 3px rgba(107,220,138,.2)}
+.person .off{width:10px;height:10px;border-radius:50%;background:#59607a}
+.person .sub{font-size:12px;color:var(--muted)}
+.help{left:50%!important;bottom:84px!important;transform:translateX(-50%)}
+
 .loading{position:fixed;inset:0;display:grid;place-items:center;background:var(--ink);z-index:20;font-family:var(--font-display);font-size:24px;transition:opacity .4s}
 
 @media (max-width:760px){
@@ -156,6 +199,11 @@ kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 
   .prompt{bottom:180px}
   .help{display:none}
   .toast{font-size:26px}
+  .chat{left:8px;right:8px;width:auto;top:132px;bottom:auto;height:38%}
+  .chat-open{top:132px;bottom:auto;left:16px;padding:8px 12px;font-size:13px}
+  .emotes{display:none;right:8px;bottom:170px;flex-wrap:wrap;max-width:200px}
+  .emotes.open{display:flex}
+  .emotes kbd{display:none}
 }
 @media (prefers-reduced-motion:reduce){
   .toast,.btn{transition:none}
@@ -168,6 +216,18 @@ kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 
 <body>
 <canvas id="gl" tabindex="0" aria-label="아트캠퍼스 3D 공간"></canvas>
 <div id="loading" class="loading">캠퍼스 문 여는 중…</div>
+
+<!-- 로그인 (Firebase 설정이 있을 때만) -->
+<section id="gate" class="gate" hidden>
+  <div class="gate-card">
+    <p class="eyebrow">직원 전용</p>
+    <h1>아트캠퍼스 입장</h1>
+    <p class="sub">등록된 직원의 구글 계정으로 들어와요. 처음 들어오면 닮은꼴 캐릭터가 준비돼 있어요.</p>
+    <button class="btn primary" id="btnLogin" type="button">구글 계정으로 입장</button>
+    <button class="btn ghost" id="btnLogout" type="button" hidden>다른 계정으로 로그인</button>
+    <p class="msg" id="gateMsg" role="status"></p>
+  </div>
+</section>
 
 <!-- 캐릭터 만들기 -->
 <section id="creator" class="creator" hidden>
@@ -192,6 +252,7 @@ kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 
   <div class="room-pill" id="roomPill">로비</div>
   <button class="sample-chip" id="sampleChip" type="button">예시 자료가 보이는 중 · 자료 연결하기</button>
   <div class="tools">
+    <button class="btn" data-ui="people" type="button" id="btnPeople" hidden>직원 <span class="badge" id="onlineCount" style="background:#3fae64"></span></button>
     <button class="btn" data-ui="search" type="button">검색</button>
     <button class="btn" data-ui="data" type="button">자료 관리</button>
     <button class="btn" data-ui="avatar" type="button">캐릭터</button>
@@ -212,11 +273,28 @@ kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 
     <ul>
       <li><b>W A S D</b> 또는 방향키로 이동, <b>Shift</b> 달리기</li>
       <li><b>마우스 드래그</b> 시점 회전, <b>휠</b> 확대·축소</li>
-      <li><b>E</b> 책장 열람, <b>Space</b> 점프</li>
+      <li><b>E</b> 책장 열람, <b>Space</b> 점프, <b>1~5</b> 이모트</li>
+      <li id="helpChat" hidden><b>Enter</b> 채팅 입력, 말하면 머리 위에 말풍선</li>
       <li>책장을 클릭해도 열려요. 지도를 누르면 순간이동</li>
     </ul>
     <button class="btn sm ghost" id="helpOk" type="button">알겠어요</button>
   </div>
+  <div class="emotes glass" id="emotes"></div>
+  <button class="emote-btn" id="btnEmote" type="button" hidden>표정</button>
+  <section class="chat glass" id="chat" hidden aria-label="채팅">
+    <div class="chat-head">
+      <div class="chat-tabs" role="tablist">
+        <button type="button" role="tab" data-tab="all" aria-selected="true">전체<b id="ub-all"></b></button>
+        <button type="button" role="tab" data-tab="room" aria-selected="false">이 방<b id="ub-room"></b></button>
+        <button type="button" role="tab" data-tab="dm" aria-selected="false">1:1<b id="ub-dm"></b></button>
+      </div>
+      <button class="chat-min" id="chatMin" type="button" aria-label="채팅 접기">–</button>
+    </div>
+    <div class="dm-bar" id="dmBar" hidden></div>
+    <ol class="chat-log" id="chatLog" aria-live="polite"></ol>
+    <form class="chat-form" id="chatForm"><input id="chatIn" maxlength="300" autocomplete="off" placeholder="Enter로 대화하기"><button class="btn sm primary" type="submit">보내기</button></form>
+  </section>
+  <button class="chat-open glass" id="chatOpen" type="button" hidden>채팅 <span class="badge" id="chatBadge"></span></button>
   <div class="joy" id="joy" hidden><div class="joy-knob" id="joyKnob"></div></div>
   <button class="jump" id="btnJump" type="button" hidden>점프</button>
   <button class="act" id="btnAct" type="button" hidden>열람</button>
@@ -384,8 +462,12 @@ async function loadSheet(url){
   if(worldBuilt) buildStations();
   return rows.length;
 }
-async function bootCatalog(){
-  try{ const c = await fetch('config.json', {cache:'no-store'}); if(c.ok){ const j = await c.json(); sharedSheetUrl = String(j.sheetCsvUrl||'').trim(); } }catch(e){}
+async function loadConfig(){
+  try{ const c = await fetch('config.json', {cache:'no-store'}); if(c.ok) return await c.json(); }catch(e){}
+  return {};
+}
+async function bootCatalog(cfg){
+  sharedSheetUrl = String(cfg.sheetCsvUrl||'').trim();
   const url = sharedSheetUrl || store.get('mc.csvUrl') || '';
   if(url){ try{ await loadSheet(url); }catch(e){ console.warn('시트를 불러오지 못해 저장된 자료를 씁니다', e); } }
 }
@@ -412,68 +494,141 @@ function bx(w,h,d,mat,x=0,y=0,z=0,parent,shadow=true){
    5. 캐릭터
    ========================================================= */
 const OPT = {
-  role:[['강사','#ff7a59'],['상담','#2bb3c0'],['운영','#8b6cf0'],['원장','#ffc94d']],
+  role:[['팀장','#ffc94d'],['주임','#8b6cf0'],['경력','#2bb3c0'],['신인','#6bbf6a'],['강사','#ff7a59'],['상담','#e86f8f'],['운영','#9aa3b8']],
   skin:['#ffe3cc','#f6cba6','#e2a982','#c3845c','#8d5a3b'],
-  eyes:[['dot','동글'],['smile','웃음'],['sleepy','졸림'],['wink','윙크'],['sparkle','반짝']],
-  hair:[['short','숏컷'],['bob','단발'],['long','긴머리'],['pony','포니테일'],['bun','똥머리'],['spiky','삐죽']],
+  eyes:[['dot','동글'],['almond','또렷'],['narrow','가는 눈'],['smile','웃음'],['sleepy','졸림'],['wink','윙크'],['sparkle','반짝'],['dizzy','빙글빙글']],
+  brows:[['soft','기본'],['thick','진한'],['straight','일자'],['angry','버럭'],['worried','시무룩'],['none','없음']],
+  mouth:[['smile','미소'],['lip','립 포인트'],['grin','활짝'],['o','오!'],['cat','고양이'],['flat','무표정'],['tongue','메롱']],
+  cheek:[['pink','발그레'],['none','없음'],['strong','홍당무']],
+  hair:[['short','숏컷'],['dandy','댄디 앞머리'],['sidepart','옆 가르마'],['perm','짧은 펌'],['bob','단발'],['medium','어깨 단발'],['longpart','긴 생머리'],['longwave','웨이브+앞머리'],['long','긴머리+앞머리'],['pony','포니테일'],['lowbun','묶은 머리'],['bun','똥머리'],['spiky','삐죽'],['afro','아프로'],['mohawk','닭벼슬'],['bald','대머리']],
   hairColor:['#2a2320','#5b3a29','#a86b3c','#e8c26a','#dcd7d2','#e86f8f','#4f7be0'],
-  top:[['hoodie','후드'],['shirt','셔츠'],['apron','작업 앞치마'],['jacket','재킷']],
-  topColor:['#f2f0ea','#2f3445','#ff7a59','#2bb3c0','#8b6cf0','#ffc94d','#6bbf6a','#e86f8f'],
-  pants:['#2f3445','#4a6fa5','#7a6a58','#d8d2c4','#1f1f22'],
-  acc:[['none','없음'],['glasses','안경'],['headphones','헤드폰'],['beret','베레모'],['cat','고양이 귀'],['pencil','귀에 연필']],
+  top:[['suit','정장+넥타이'],['suitw','정장+블라우스'],['blouse','블라우스'],['knit','터틀넥'],['shirt','셔츠'],['hoodie','후드'],['jacket','캐주얼 재킷'],['apron','작업 앞치마']],
+  topColor:['#f2f0ea','#efe6d2','#cdb89a','#23283a','#1c1c20','#ff7a59','#2bb3c0','#8b6cf0','#ffc94d','#6bbf6a','#e86f8f'],
+  pants:['#2f3445','#23283a','#1f1f22','#4a6fa5','#7a6a58','#d8d2c4'],
+  glasses:[['none','없음'],['round','동그란 뿔테'],['square','사각 뿔테'],['metal','얇은 금속테'],['sun','선글라스'],['heart','하트 안경']],
+  acc:[['none','없음'],['headphones','헤드폰'],['beret','베레모'],['cat','고양이 귀'],['bunny','토끼 귀'],['crown','왕관'],['party','고깔모자'],['flower','머리 꽃'],['pencil','귀에 연필']],
+  fx:[['none','없음'],['mustache','콧수염'],['beard','턱수염'],['freckles','주근깨'],['sweat','식은땀'],['bandage','반창고']],
+  head:[['1','기본'],['1.25','큰 머리'],['1.5','왕 큰 머리']],
 };
-const roleColor = r => (OPT.role.find(x=>x[0]===r)||OPT.role[0])[1];
-function randomAvatar(name=''){
-  const pick = a => a[Math.floor(Math.random()*a.length)];
-  const v = a => { const p = pick(a); return Array.isArray(p) ? p[0] : p; };
-  return {name, role:v(OPT.role), skin:v(OPT.skin), eyes:v(OPT.eyes), hair:v(OPT.hair), hairColor:v(OPT.hairColor), top:v(OPT.top), topColor:v(OPT.topColor), pants:v(OPT.pants), acc:v(OPT.acc)};
+const DEFAULTS = {name:'',role:'신인',skin:'#f6cba6',eyes:'dot',brows:'soft',mouth:'smile',cheek:'pink',hair:'short',hairColor:'#2a2320',top:'hoodie',topColor:'#2bb3c0',pants:'#2f3445',glasses:'none',acc:'none',fx:'none',head:'1'};
+function normAvatar(a){ a = {...DEFAULTS, ...(a||{})}; if(a.acc==='glasses'){ a.acc = 'none'; if(a.glasses==='none') a.glasses = 'round'; } return a; }
+const roleColor = r => (OPT.role.find(x=>x[0]===r)||[0,'#9aa3b8'])[1];
+const tagY = a => 2.35 + (parseFloat(a.head||1)-1)*.85 + (a.hair==='afro' ? .3 : 0) + (a.acc==='crown'||a.acc==='party'||a.acc==='bunny' ? .2 : 0);
+function randomAvatar(name='', role){
+  const v = a => { const p = a[Math.floor(Math.random()*a.length)]; return Array.isArray(p) ? p[0] : p; };
+  const o = {name}; for(const k of Object.keys(OPT)) o[k] = v(OPT[k]);
+  if(Math.random() < .6) o.head = '1'; if(Math.random() < .5) o.fx = 'none'; if(role) o.role = role;
+  return normAvatar(o);
 }
-let avatar = store.get('mc.avatar') || {...randomAvatar(''), role:'강사'};
+let avatar = normAvatar(store.get('mc.avatar') || randomAvatar(''));
+let presetNotice = false;
 
-function faceTex(skin, eyes){
+function faceTex(o){
   return canvasTex(256,256,(x)=>{
-    x.fillStyle = skin; x.fillRect(0,0,256,256);
-    x.fillStyle = 'rgba(255,110,110,.32)';
-    [[62,170],[194,170]].forEach(([cx,cy]) => { x.beginPath(); x.ellipse(cx,cy,24,13,0,0,Math.PI*2); x.fill(); });
-    const ink = '#2a2028'; x.fillStyle = ink; x.strokeStyle = ink; x.lineCap = 'round'; x.lineWidth = 10;
+    x.fillStyle = o.skin; x.fillRect(0,0,256,256);
+    const ink = '#2a2028', light = ['#e8c26a','#dcd7d2','#e86f8f','#4f7be0','#a86b3c'].includes(o.hairColor);
+    if(o.cheek!=='none'){ const s = o.cheek==='strong'; x.fillStyle = s ? 'rgba(255,70,80,.6)' : 'rgba(255,110,110,.32)';
+      [[62,170],[194,170]].forEach(([cx,cy]) => { x.beginPath(); x.ellipse(cx,cy,s?30:24,s?17:13,0,0,Math.PI*2); x.fill(); }); }
+    x.fillStyle = ink; x.strokeStyle = ink; x.lineCap = 'round'; x.lineJoin = 'round'; x.lineWidth = 10;
     const dotEye = (cx,cy,rx=15,ry=21) => { x.fillStyle=ink; x.beginPath(); x.ellipse(cx,cy,rx,ry,0,0,Math.PI*2); x.fill(); x.fillStyle='#fff'; x.beginPath(); x.arc(cx+5,cy-8,5.5,0,Math.PI*2); x.fill(); };
-    const smileEye = (cx,cy) => { x.beginPath(); x.arc(cx,cy+10,17,Math.PI*1.15,Math.PI*1.85); x.stroke(); };
-    const E = [[86,128],[170,128]];
-    if(eyes==='dot') E.forEach(e=>dotEye(...e));
-    else if(eyes==='smile') E.forEach(e=>smileEye(...e));
-    else if(eyes==='sleepy') E.forEach(([cx,cy]) => { x.beginPath(); x.moveTo(cx-18,cy+4); x.lineTo(cx+18,cy+4); x.stroke(); x.lineWidth=6; x.beginPath(); x.moveTo(cx-14,cy+12); x.lineTo(cx-8,cy+18); x.stroke(); x.lineWidth=10; });
-    else if(eyes==='wink'){ dotEye(...E[0]); smileEye(...E[1]); }
-    else { E.forEach(([cx,cy]) => { x.fillStyle=ink; x.beginPath(); x.ellipse(cx,cy,19,25,0,0,Math.PI*2); x.fill(); x.fillStyle='#6d5bd0'; x.beginPath(); x.ellipse(cx,cy+7,13,13,0,0,Math.PI*2); x.fill(); x.fillStyle='#fff'; x.beginPath(); x.arc(cx+6,cy-9,7,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(cx-6,cy+9,3.5,0,Math.PI*2); x.fill(); }); }
-    x.strokeStyle = ink; x.lineWidth = 7; x.beginPath(); x.arc(128,176,13,Math.PI*0.15,Math.PI*0.85); x.stroke();
+    const smileEye = (cx,cy) => { x.lineWidth=10; x.beginPath(); x.arc(cx,cy+10,17,Math.PI*1.15,Math.PI*1.85); x.stroke(); };
+    const E = [[86,128,-1],[170,128,1]];
+    const e = o.eyes;
+    if(e==='dot') E.forEach(([a,b])=>dotEye(a,b));
+    else if(e==='almond') E.forEach(([cx,cy,s]) => { x.fillStyle=ink; x.beginPath(); x.ellipse(cx,cy+2,16,13,0,0,Math.PI*2); x.fill(); x.lineWidth=5; x.beginPath(); x.moveTo(cx-s*-20,cy-6); x.quadraticCurveTo(cx,cy-16,cx+s*22,cy-8); x.stroke(); x.fillStyle='#fff'; x.beginPath(); x.arc(cx+5,cy-3,4.5,0,Math.PI*2); x.fill(); });
+    else if(e==='narrow') E.forEach(([cx,cy]) => { x.fillStyle=ink; x.beginPath(); x.ellipse(cx,cy+4,17,6,0,0,Math.PI*2); x.fill(); });
+    else if(e==='smile') E.forEach(([a,b])=>smileEye(a,b));
+    else if(e==='sleepy') E.forEach(([cx,cy]) => { x.lineWidth=10; x.beginPath(); x.moveTo(cx-18,cy+4); x.lineTo(cx+18,cy+4); x.stroke(); x.lineWidth=6; x.beginPath(); x.moveTo(cx-14,cy+12); x.lineTo(cx-8,cy+18); x.stroke(); });
+    else if(e==='wink'){ dotEye(E[0][0],E[0][1]); smileEye(E[1][0],E[1][1]); }
+    else if(e==='dizzy') E.forEach(([cx,cy]) => { x.lineWidth=5; x.beginPath(); for(let a=0;a<Math.PI*5;a+=.2){ const r = 2+a*1.3; x.lineTo(cx+Math.cos(a)*r, cy+Math.sin(a)*r); } x.stroke(); });
+    else E.forEach(([cx,cy]) => { x.fillStyle=ink; x.beginPath(); x.ellipse(cx,cy,19,25,0,0,Math.PI*2); x.fill(); x.fillStyle='#6d5bd0'; x.beginPath(); x.ellipse(cx,cy+7,13,13,0,0,Math.PI*2); x.fill(); x.fillStyle='#fff'; x.beginPath(); x.arc(cx+6,cy-9,7,0,Math.PI*2); x.fill(); x.beginPath(); x.arc(cx-6,cy+9,3.5,0,Math.PI*2); x.fill(); });
+    // 눈썹
+    if(o.brows!=='none'){ x.strokeStyle = light ? o.hairColor : ink; x.lineWidth = o.brows==='thick' ? 13 : 7;
+      E.forEach(([cx,,s]) => { const by = 90, inX = cx - s*20, outX = cx + s*20; x.beginPath();
+        if(o.brows==='straight'){ x.moveTo(inX,by); x.lineTo(outX,by); }
+        else if(o.brows==='angry'){ x.moveTo(inX,by+10); x.lineTo(outX,by-6); }
+        else if(o.brows==='worried'){ x.moveTo(inX,by-8); x.lineTo(outX,by+6); }
+        else { x.moveTo(inX,by+3); x.quadraticCurveTo(cx,by-8,outX,by+4); }
+        x.stroke(); }); }
+    // 입
+    x.strokeStyle = ink; x.fillStyle = ink; x.lineWidth = 7; const m = o.mouth;
+    if(m==='lip'){ x.strokeStyle='#d6455a'; x.lineWidth=9; x.beginPath(); x.arc(128,174,12,Math.PI*0.15,Math.PI*0.85); x.stroke(); }
+    else if(m==='grin'){ x.beginPath(); x.arc(128,168,24,0,Math.PI); x.closePath(); x.fill(); x.fillStyle='#fff'; x.fillRect(108,168,40,8); x.fillStyle='#ff7a8a'; x.beginPath(); x.ellipse(128,185,10,5,0,0,Math.PI*2); x.fill(); }
+    else if(m==='o'){ x.beginPath(); x.ellipse(128,182,9,12,0,0,Math.PI*2); x.fill(); }
+    else if(m==='cat'){ x.lineWidth=6; x.beginPath(); x.arc(117,172,11,0,Math.PI); x.stroke(); x.beginPath(); x.arc(139,172,11,0,Math.PI); x.stroke(); }
+    else if(m==='flat'){ x.beginPath(); x.moveTo(114,178); x.lineTo(142,178); x.stroke(); }
+    else { x.beginPath(); x.arc(128,176,13,Math.PI*0.15,Math.PI*0.85); x.stroke(); if(m==='tongue'){ x.fillStyle='#ff7a8a'; x.beginPath(); x.ellipse(136,192,8,10,0,0,Math.PI*2); x.fill(); } }
+    // 재미 요소
+    if(o.fx==='mustache'){ x.fillStyle = light ? o.hairColor : ink; x.beginPath(); x.ellipse(113,158,17,7,-.25,0,Math.PI*2); x.ellipse(143,158,17,7,.25,0,Math.PI*2); x.fill(); }
+    else if(o.fx==='beard'){ x.fillStyle = light ? o.hairColor : 'rgba(42,32,40,.85)'; x.beginPath(); x.moveTo(20,186); x.quadraticCurveTo(40,256,128,256); x.quadraticCurveTo(216,256,236,186); x.lineTo(236,256); x.lineTo(20,256); x.fill();
+      x.beginPath(); x.moveTo(60,200); x.quadraticCurveTo(128,236,196,200); x.lineTo(196,256); x.lineTo(60,256); x.fill(); }
+    else if(o.fx==='freckles'){ x.fillStyle='rgba(140,80,40,.6)'; [[52,150],[64,158],[46,162],[60,170],[196,150],[208,158],[190,162],[204,170]].forEach(([a,b])=>{ x.beginPath(); x.arc(a,b,3.2,0,Math.PI*2); x.fill(); }); }
+    else if(o.fx==='sweat'){ x.fillStyle='#7cc7ff'; x.beginPath(); x.moveTo(212,40); x.quadraticCurveTo(232,80,212,88); x.quadraticCurveTo(192,80,212,40); x.fill(); x.fillStyle='rgba(255,255,255,.8)'; x.beginPath(); x.arc(206,74,4,0,Math.PI*2); x.fill(); }
+    else if(o.fx==='bandage'){ x.save(); x.translate(196,158); x.rotate(-.5); x.fillStyle='#f0cfa0'; rr(x,-30,-10,60,20,6); x.fill(); x.fillStyle='#e2b783'; x.fillRect(-9,-10,18,20); x.restore(); }
   });
 }
 function buildHair(head, style, hair, accent){
+  if(style==='bald'){ const s = new THREE.Mesh(new THREE.SphereGeometry(.07,10,8), new THREE.MeshBasicMaterial({color:'#ffffff',transparent:true,opacity:.55})); s.position.set(.16,.74,.18); s.scale.set(1.4,.4,1); head.add(s); return; }
   const add = (w,h,d,x,y,z) => bx(w,h,d,hair,x,y,z,head);
-  add(.86,.2,.78, 0,.73,0);
-  const bangs = () => add(.82,.15,.1, 0,.61,.35);
-  if(style==='short'){ add(.86,.45,.14,0,.5,-.33); add(.07,.3,.66,-.43,.56,0); add(.07,.3,.66,.43,.56,0); bangs(); }
-  else if(style==='bob'){ add(.88,.64,.15,0,.41,-.34); add(.09,.6,.7,-.44,.43,0); add(.09,.6,.7,.44,.43,0); bangs(); }
-  else if(style==='long'){ add(.88,1.0,.16,0,.24,-.35); add(.09,.78,.68,-.44,.34,-.02); add(.09,.78,.68,.44,.34,-.02); bangs(); }
-  else if(style==='pony'){ add(.86,.45,.14,0,.5,-.33); add(.07,.3,.66,-.43,.56,0); add(.07,.3,.66,.43,.56,0); bangs();
+  const ball = (r,x,y,z,sx=1,sy=1,sz=1) => { const s = new THREE.Mesh(new THREE.SphereGeometry(r,14,10), hair); s.position.set(x,y,z); s.scale.set(sx,sy,sz); s.castShadow = true; head.add(s); return s; };
+  if(style==='afro'){ ball(.6,0,.86,-.1,1.08,.92,1); return; }
+  if(style==='mohawk'){ add(.16,.22,.74,0,.82,0); [-.28,-.1,.08,.26].forEach((z,i) => { const c = new THREE.Mesh(new THREE.ConeGeometry(.09,.34,4), hair); c.position.set(0,1.0,z); c.rotation.x = -.25+i*.1; c.castShadow = true; head.add(c); }); return; }
+  const tight = style==='lowbun';
+  add(.86,tight?.16:.2,.78, 0,tight?.71:.73,0);
+  const back = (h,y,d=.14,z=-.33) => add(.88,h,d,0,y,z);
+  const sides = (h,y,w=.07) => { add(w,h,.66,-.43,y,0); add(w,h,.66,.43,y,0); };
+  const bangs = (h=.15,y=.61) => add(.82,h,.1, 0,y,.35);
+  const curtains = () => { add(.36,.18,.1,-.22,.6,.35).rotation.z = .42; add(.36,.18,.1,.22,.6,.35).rotation.z = -.42; };
+  if(style==='short'){ back(.45,.5); sides(.3,.56); bangs(); }
+  else if(style==='dandy'){ back(.45,.5); sides(.32,.56); bangs(.22,.62); }
+  else if(style==='sidepart'){ back(.45,.5); sides(.3,.56); add(.62,.15,.12,.1,.66,.35).rotation.z = -.2; add(.5,.12,.62,-.12,.86,.02); }
+  else if(style==='perm'){ back(.45,.5); sides(.3,.56); bangs(.14,.63); [[-.28,.86,.2],[0,.88,.24],[.28,.86,.2],[-.3,.86,-.12],[0,.9,-.08],[.3,.86,-.12],[-.18,.92,.04],[.18,.92,.04]].forEach(([a,b,c]) => ball(.13,a,b,c)); }
+  else if(style==='bob'){ back(.64,.41,.15,-.34); sides(.6,.43,.09); bangs(); }
+  else if(style==='medium'){ back(.82,.33,.15,-.34); sides(.76,.37,.09); curtains(); }
+  else if(style==='longpart'){ back(1.08,.19,.16,-.35); sides(.98,.25,.09); add(.1,.62,.12,-.4,.02,.2); add(.1,.62,.12,.4,.02,.2); curtains(); }
+  else if(style==='longwave'){ back(1.02,.22,.16,-.35); sides(.9,.3,.09); bangs(.2,.6); [[-.46,-.08,.05],[.46,-.08,.05],[-.4,-.18,-.25],[.4,-.18,-.25],[0,-.24,-.36]].forEach(([a,b,c]) => ball(.15,a,b,c)); }
+  else if(style==='long'){ back(1.0,.24,.16,-.35); sides(.78,.34,.09); bangs(); }
+  else if(style==='pony'){ back(.45,.5); sides(.3,.56); bangs();
     const p = new THREE.Group(); p.position.set(0,.6,-.42); p.rotation.x = .35; head.add(p);
     bx(.2,.6,.2,hair,0,-.28,0,p); bx(.24,.08,.24,M(accent),0,0,0,p); }
-  else if(style==='bun'){ add(.86,.45,.14,0,.5,-.33); add(.07,.3,.66,-.43,.56,0); add(.07,.3,.66,.43,.56,0); bangs();
-    const s = new THREE.Mesh(new THREE.SphereGeometry(.21,16,12), hair); s.position.set(0,.95,-.14); s.castShadow = true; head.add(s); }
-  else { add(.86,.4,.14,0,.53,-.33); bangs();
+  else if(style==='lowbun'){ back(.42,.5); sides(.24,.6,.05); add(.52,.1,.08,-.12,.68,.36).rotation.z = .16; ball(.16,0,.36,-.46); }
+  else if(style==='bun'){ back(.45,.5); sides(.3,.56); bangs(); ball(.21,0,.95,-.14); }
+  else { back(.4,.53); bangs();
     [[0,.9,0,0,0],[-.25,.86,.05,.5,.1],[.25,.86,.05,-.5,.1],[-.12,.86,-.22,.3,-.4],[.14,.86,-.22,-.3,-.4]].forEach(([x,y,z,rz,rx]) => {
       const c = new THREE.Mesh(new THREE.ConeGeometry(.13,.32,4), hair); c.position.set(x,y,z); c.rotation.set(rx,0,rz); c.castShadow = true; head.add(c); }); }
 }
-function buildTop(root, o, top, topDark){
+function buildTop(root, o, top, topDark, skin){
   const white = M('#f7f5f0');
+  const lapels = () => { bx(.1,.34,.02,topDark,-.11,.97,.2,root).rotation.z = .32; bx(.1,.34,.02,topDark,.11,.97,.2,root).rotation.z = -.32; };
   if(o.top==='hoodie'){ bx(.5,.18,.16,top,0,1.12,-.2,root); bx(.36,.14,.02,topDark,0,.72,.19,root); bx(.03,.14,.02,white,-.08,.99,.19,root); bx(.03,.14,.02,white,.08,.99,.19,root); }
-  else if(o.top==='shirt'){ const c1 = bx(.16,.07,.02,white,-.08,1.1,.19,root); c1.rotation.z = -.45; const c2 = bx(.16,.07,.02,white,.08,1.1,.19,root); c2.rotation.z = .45; [.98,.86,.74].forEach(y => bx(.035,.035,.02,white,0,y,.19,root,false)); }
+  else if(o.top==='shirt'){ bx(.16,.07,.02,white,-.08,1.1,.19,root).rotation.z = -.45; bx(.16,.07,.02,white,.08,1.1,.19,root).rotation.z = .45; [.98,.86,.74].forEach(y => bx(.035,.035,.02,white,0,y,.19,root,false)); }
   else if(o.top==='apron'){ const ap = M('#6d4c3a'); bx(.46,.62,.02,ap,0,.8,.19,root); bx(.05,.12,.02,ap,-.15,1.1,.19,root); bx(.05,.12,.02,ap,.15,1.1,.19,root);
     ['#ff7a59','#2bb3c0','#ffc94d','#8b6cf0'].forEach((c,i) => bx(.05,.05,.01,M(c),-.13+i*.09,.66+(i%2)*.1,.205,root,false)); }
-  else { bx(.16,.5,.02,white,0,.88,.185,root); const l1 = bx(.1,.32,.02,topDark,-.11,.98,.2,root); l1.rotation.z = .32; const l2 = bx(.1,.32,.02,topDark,.11,.98,.2,root); l2.rotation.z = -.32; }
+  else if(o.top==='suit'){ bx(.2,.42,.02,white,0,.92,.185,root); const tie = M(['#1c1c20','#23283a'].includes(o.topColor) ? '#2d3350' : '#23283a');
+    bx(.09,.06,.03,tie,0,1.08,.2,root,false); bx(.07,.34,.02,tie,0,.88,.198,root,false); bx(.07,.02,.021,M('#8a96b8'),0,.9,.2,root,false); lapels(); bx(.035,.035,.02,topDark,0,.7,.19,root,false); }
+  else if(o.top==='suitw'){ bx(.18,.36,.02,white,0,.95,.185,root); lapels(); bx(.035,.035,.02,topDark,0,.7,.19,root,false); }
+  else if(o.top==='blouse'){ bx(.15,.1,.02,skin,0,1.08,.185,root,false); bx(.1,.12,.02,skin,0,1.01,.185,root,false).rotation.z = Math.PI/4; bx(.2,.012,.012,M('#d9b36a'),0,1.0,.2,root,false); bx(.04,.04,.015,M('#e8c26a'),0,.96,.205,root,false); }
+  else if(o.top==='knit'){ const c = new THREE.Mesh(new THREE.CylinderGeometry(.19,.21,.14,16), top); c.position.set(0,1.15,0); c.castShadow = true; root.add(c); [-.15,-.05,.05,.15].forEach(xx => bx(.012,.4,.01,topDark,xx,.82,.185,root,false)); }
+  else { bx(.16,.5,.02,white,0,.88,.185,root); lapels(); }
+}
+function buildGlasses(head, o){
+  const dark = M('#24242c');
+  if(o.glasses==='round' || o.glasses==='metal'){ const m = o.glasses==='metal' ? M('#bfb08a',{metalness:.6,roughness:.3}) : dark, t = o.glasses==='metal' ? .008 : .016;
+    [-.13,.13].forEach(x => { const r = new THREE.Mesh(new THREE.TorusGeometry(.09,t,6,24), m); r.position.set(x,.37,.375); head.add(r); }); bx(.07,.012,.012,m,0,.39,.375,head,false); }
+  else if(o.glasses==='square'){ [-.14,.14].forEach(x => { bx(.21,.03,.02,dark,x,.44,.375,head,false); bx(.21,.03,.02,dark,x,.3,.375,head,false); bx(.03,.17,.02,dark,x-.105,.37,.375,head,false); bx(.03,.17,.02,dark,x+.105,.37,.375,head,false); }); bx(.07,.025,.02,dark,0,.42,.375,head,false); }
+  else if(o.glasses==='sun'){ const g = M('#111216',{metalness:.5,roughness:.15}); [-.14,.14].forEach(x => bx(.23,.14,.03,g,x,.37,.38,head,false)); bx(.08,.03,.02,g,0,.41,.38,head,false); }
+  else if(o.glasses==='heart'){ const tex = canvasTex(256,96,(x)=>{ const hh = (cx) => { x.beginPath(); x.moveTo(cx,82); x.bezierCurveTo(cx-60,40,cx-40,0,cx,24); x.bezierCurveTo(cx+40,0,cx+60,40,cx,82); x.fill(); }; x.fillStyle='rgba(255,60,110,.92)'; hh(64); hh(192); x.fillRect(110,30,36,8); });
+    signMesh(tex,.62,.23,0,.37,.38,0,head); }
 }
 function buildAcc(head, o){
   const dark = M('#24242c'), acc = M(roleColor(o.role));
-  if(o.acc==='glasses'){ [-.13,.13].forEach(x => { const t = new THREE.Mesh(new THREE.TorusGeometry(.085,.016,6,20), dark); t.position.set(x,.37,.375); head.add(t); }); bx(.09,.02,.02,dark,0,.38,.375,head,false); }
+  buildGlasses(head, o);
+  if(o.acc==='bunny'){ [-1,1].forEach(s => { const e = bx(.11,.46,.06,M('#ffffff'),s*.15,1.02,0,head); e.rotation.z = -s*.12; bx(.05,.32,.01,M('#ffb3c7'),s*.15,1.0,.035,head,false).rotation.z = -s*.12; }); }
+  else if(o.acc==='crown'){ const g = M('#f2c14e',{metalness:.7,roughness:.25}); const c = new THREE.Mesh(new THREE.CylinderGeometry(.26,.26,.14,10,1,true), g); c.position.y = .9; head.add(c);
+    for(let i=0;i<5;i++){ const a = i/5*Math.PI*2; const k = new THREE.Mesh(new THREE.ConeGeometry(.06,.14,4), g); k.position.set(Math.sin(a)*.24,1.03,Math.cos(a)*.24); head.add(k); } }
+  else if(o.acc==='party'){ const c = new THREE.Mesh(new THREE.ConeGeometry(.17,.46,16), acc); c.position.set(.1,1.04,0); c.rotation.z = -.28; c.castShadow = true; head.add(c);
+    const p = new THREE.Mesh(new THREE.SphereGeometry(.06,10,8), M('#ffffff')); p.position.set(.16,1.26,0); head.add(p); }
+  else if(o.acc==='flower'){ [[0,0],[.07,.05],[-.07,.05],[.05,-.06],[-.05,-.06]].forEach(([a,b],i) => { const s = new THREE.Mesh(new THREE.SphereGeometry(i?.055:.045,10,8), M(i?'#ff9ec4':'#ffd36e')); s.position.set(.42,.72+b,.12+a); head.add(s); }); }
   else if(o.acc==='headphones'){ const b = new THREE.Mesh(new THREE.TorusGeometry(.45,.04,8,24,Math.PI), dark); b.position.set(0,.42,0); head.add(b);
     [-.46,.46].forEach(x => { const c = new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,.1,18), acc); c.rotation.z = H; c.position.set(x,.4,0); c.castShadow = true; head.add(c); }); }
   else if(o.acc==='beret'){ const b = new THREE.Mesh(new THREE.CylinderGeometry(.42,.45,.12,24), M('#d4483b')); b.position.set(.05,.86,0); b.rotation.z = -.22; b.castShadow = true; head.add(b);
@@ -483,6 +638,7 @@ function buildAcc(head, o){
     const t = new THREE.Mesh(new THREE.ConeGeometry(.03,.08,6), M('#e8c9a0')); t.rotation.x = H; t.position.set(.43,.5,.25); head.add(t); }
 }
 function buildCharacter(o){
+  o = normAvatar(o);
   const g = new THREE.Group(), root = new THREE.Group(); g.add(root);
   const skin = M(o.skin), top = M(o.topColor), pants = M(o.pants), hair = M(o.hairColor), dark = M('#2b2b33');
   const topDark = M('#' + new THREE.Color(o.topColor).multiplyScalar(.78).getHexString());
@@ -492,25 +648,56 @@ function buildCharacter(o){
   const mkArm = sx => { const p = new THREE.Group(); p.position.set(sx,1.08,0); bx(.18,.44,.2,top,0,-.2,0,p); bx(.16,.14,.18,skin,0,-.48,0,p); root.add(p); return p; };
   const armL = mkArm(-.39), armR = mkArm(.39);
   const head = new THREE.Group(); head.position.set(0,1.14,0); root.add(head);
-  const faceMat = new THREE.MeshStandardMaterial({map:faceTex(o.skin,o.eyes), roughness:.8});
+  const faceMat = new THREE.MeshStandardMaterial({map:faceTex(o), roughness:.8});
   const hm = new THREE.Mesh(new THREE.BoxGeometry(.8,.72,.72), [skin,skin,skin,skin,faceMat,skin]);
   hm.position.y = .37; hm.castShadow = true; head.add(hm);
   buildHair(head, o.hair, hair, roleColor(o.role));
-  buildTop(root, o, top, topDark);
+  buildTop(root, o, top, topDark, skin);
   buildAcc(head, o);
-  g.userData = {root, legL, legR, armL, armR, head, phase:0};
+  head.scale.setScalar(parseFloat(o.head)||1);
+  g.userData = {root, legL, legR, armL, armR, head, phase:0, emote:null, av:o};
   return g;
+}
+/* --- 이모트 */
+const EMOTES = [['wave','손인사',2.2],['dance','춤',4],['bow','꾸벅',2],['heart','하트',2.6],['laugh','ㅋㅋㅋ',2.4]];
+const fxSprites = [];
+function floatSprite(ch, kind){
+  const tex = canvasTex(256,256,(x)=>{ x.textAlign='center'; x.textBaseline='middle';
+    if(kind==='heart'){ x.fillStyle='#ff4f7e'; x.beginPath(); x.moveTo(128,220); x.bezierCurveTo(10,140,40,30,128,80); x.bezierCurveTo(216,30,246,140,128,220); x.fill(); }
+    else { x.font='110px "Do Hyeon", sans-serif'; x.lineWidth=14; x.strokeStyle='#151925'; x.strokeText('ㅋㅋㅋ',128,128); x.fillStyle='#ffc94d'; x.fillText('ㅋㅋㅋ',128,128); } });
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, transparent:true, depthTest:false})); sp.renderOrder = 11;
+  sp.scale.setScalar(kind==='heart' ? .7 : .9); sp.position.set(0, tagY(ch.userData.av||{})+.3, 0); ch.add(sp);
+  fxSprites.push({sp, ch, life:1.8});
+}
+function playEmote(ch, type){
+  const e = EMOTES.find(x=>x[0]===type); if(!e) return;
+  resetPose(ch); ch.userData.emote = {type, age:0, dur:e[2]};
+  if(type==='heart' || type==='laugh') floatSprite(ch, type);
+}
+function resetPose(ch){ const u = ch.userData; u.emote = null; u.root.rotation.set(0,0,0); u.armL.rotation.z = 0; u.armR.rotation.z = 0; u.head.rotation.x = 0; }
+function updateFx(dt){
+  for(let i=fxSprites.length-1;i>=0;i--){ const f = fxSprites[i]; f.life -= dt; f.sp.position.y += dt*.6; f.sp.material.opacity = Math.min(1, f.life*1.5);
+    if(f.life <= 0){ f.ch.remove(f.sp); f.sp.material.map.dispose(); f.sp.material.dispose(); fxSprites.splice(i,1); } }
 }
 function animateChar(ch, dt, moving, speed, t){
   const u = ch.userData; const k = 1-Math.exp(-14*dt);
+  if(moving && u.emote) resetPose(ch);
   if(moving){ u.phase += dt*speed*2.3; }
   const s = moving ? Math.sin(u.phase)*0.75 : 0;
   u.legL.rotation.x += (s-u.legL.rotation.x)*k; u.legR.rotation.x += (-s-u.legR.rotation.x)*k;
   u.armL.rotation.x += (-s*.8-u.armL.rotation.x)*k; u.armR.rotation.x += (s*.8-u.armR.rotation.x)*k;
   u.root.position.y = moving ? Math.abs(Math.sin(u.phase))*0.07 : Math.sin(t*2.2)*0.012;
   u.head.rotation.z = moving ? 0 : Math.sin(t*1.3)*0.03;
+  const e = u.emote; if(!e) return;
+  e.age += dt; const a = e.age, env = Math.sin(Math.min(1, a/e.dur)*Math.PI);
+  if(e.type==='wave'){ u.armR.rotation.z = 2.5*Math.min(1,a*5)*Math.min(1,(e.dur-a)*5) + Math.sin(a*14)*.35*env; u.armR.rotation.x = 0; }
+  else if(e.type==='dance'){ u.root.rotation.y = Math.sin(a*6)*.6; u.root.position.y = Math.abs(Math.sin(a*12))*.14; u.armL.rotation.z = -(1.3+Math.sin(a*12)*.9); u.armR.rotation.z = 1.3+Math.sin(a*12+Math.PI)*.9; u.legL.rotation.x = Math.max(0,Math.sin(a*12))*.7; u.legR.rotation.x = Math.max(0,-Math.sin(a*12))*.7; u.head.rotation.z = Math.sin(a*12)*.15; }
+  else if(e.type==='bow'){ u.root.rotation.x = .45*env; u.head.rotation.x = .35*env; u.armL.rotation.x = u.armR.rotation.x = -.2*env; }
+  else if(e.type==='heart'){ const up = Math.min(1,a*4)*Math.min(1,(e.dur-a)*4); u.armL.rotation.z = -2.75*up; u.armR.rotation.z = 2.75*up; u.armL.rotation.x = u.armR.rotation.x = 0; }
+  else if(e.type==='laugh'){ u.root.rotation.z = Math.sin(a*32)*.07*env; u.head.rotation.x = -.3*env; u.armL.rotation.x = u.armR.rotation.x = -.6*env; }
+  if(a >= e.dur) resetPose(ch);
 }
-function nameTag(name, role){
+function nameTag(name, role, y=2.35){
   const tex = canvasTex(512,128,(x)=>{
     const col = roleColor(role);
     x.font = '700 46px "Noto Sans KR", sans-serif'; const nw = x.measureText(name).width;
@@ -522,7 +709,7 @@ function nameTag(name, role){
     x.fillStyle = '#fff'; x.font = '700 46px "Noto Sans KR", sans-serif'; x.fillText(name, X+rw+54, 66);
   });
   const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, depthTest:false, transparent:true}));
-  sp.scale.set(2.1,.525,1); sp.position.y = 2.35; sp.renderOrder = 10; return sp;
+  sp.scale.set(2.1,.525,1); sp.position.y = y; sp.renderOrder = 10; return sp;
 }
 
 /* =========================================================
@@ -547,7 +734,9 @@ function renderFields(){
   const field = (label, inner) => { const d = document.createElement('div'); d.className = 'field'; d.innerHTML = `<div class="flabel">${label}</div>`; d.appendChild(inner); wrap.appendChild(d); };
   const nameIn = document.createElement('input'); nameIn.className = 'name-in'; nameIn.id = 'nameIn'; nameIn.maxLength = 8; nameIn.placeholder = '이름 또는 별명 (8자까지)'; nameIn.value = avatar.name || '';
   nameIn.addEventListener('input', () => { avatar.name = nameIn.value.trim(); });
+  if(presetNotice){ const n = document.createElement('p'); n.className = 'preset-note'; n.textContent = '사진을 보고 닮은꼴 추천 캐릭터를 준비해 뒀어요. 마음에 안 드는 곳은 마음대로 고치세요.'; wrap.appendChild(n); }
   field('이름', nameIn);
+  const sec = t => { const h = document.createElement('div'); h.className = 'cr-sec'; h.textContent = t; wrap.appendChild(h); };
   const group = (key, label, opts, swatch) => {
     const c = document.createElement('div'); c.className = 'chips'; c.setAttribute('role','group'); c.setAttribute('aria-label',label);
     opts.forEach(op => {
@@ -560,12 +749,16 @@ function renderFields(){
     });
     field(label, c);
   };
-  group('role','직무',OPT.role); group('skin','피부',OPT.skin,true); group('eyes','눈',OPT.eyes);
-  group('hair','헤어 스타일',OPT.hair); group('hairColor','헤어 색',OPT.hairColor,true);
-  group('top','상의',OPT.top); group('topColor','상의 색',OPT.topColor,true); group('pants','하의 색',OPT.pants,true);
-  group('acc','소품',OPT.acc);
+  group('role','직급 · 직무',OPT.role);
+  sec('얼굴'); group('skin','피부',OPT.skin,true); group('eyes','눈',OPT.eyes); group('brows','눈썹',OPT.brows); group('mouth','입',OPT.mouth); group('cheek','볼',OPT.cheek);
+  sec('헤어'); group('hair','헤어 스타일',OPT.hair); group('hairColor','헤어 색',OPT.hairColor,true);
+  sec('옷'); group('top','상의',OPT.top); group('topColor','상의 색',OPT.topColor,true); group('pants','하의 색',OPT.pants,true);
+  sec('소품 · 웃음 포인트'); group('glasses','안경',OPT.glasses); group('acc','머리 소품',OPT.acc); group('fx','얼굴 장식',OPT.fx); group('head','머리 크기',OPT.head);
+  const em = document.createElement('div'); em.className = 'chips';
+  EMOTES.forEach(([k,label]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = label; b.addEventListener('click', () => previewChar && playEmote(previewChar,k)); em.appendChild(b); });
+  sec('이모트 미리보기'); field('월드에서는 숫자키 1~5', em);
 }
-$('#btnRandom').addEventListener('click', () => { avatar = randomAvatar(avatar.name); renderFields(); refreshPreview(); });
+$('#btnRandom').addEventListener('click', () => { avatar = randomAvatar(avatar.name, avatar.role); presetNotice = false; renderFields(); refreshPreview(); });
 $('#btnEnter').addEventListener('click', enterWorld);
 
 /* =========================================================
@@ -824,21 +1017,30 @@ function enterWorld(){
   if(!worldBuilt) buildWorld();
   const pos = player ? player.position.clone() : null, rot = player ? player.rotation.y : Math.PI;
   if(player) scene.remove(player);
-  player = buildCharacter(avatar); player.add(nameTag(avatar.name, avatar.role)); scene.add(player);
+  player = buildCharacter(avatar); player.add(nameTag(avatar.name, avatar.role, tagY(avatar))); scene.add(player);
   if(pos){ player.position.copy(pos); player.rotation.y = rot; } else teleportRoom('lobby');
   $('#meName').textContent = avatar.name; $('#meRole').textContent = avatar.role + ' · 아트캠퍼스';
   const dot = $('#meDot'); dot.style.background = roleColor(avatar.role); dot.textContent = avatar.name.slice(0,1);
   $('#creator').hidden = true; $('#hud').hidden = false; mode = 'world';
   $('#help').hidden = isTouch || !!store.get('mc.helpSeen');
-  $('#joy').hidden = $('#btnJump').hidden = !isTouch;
+  $('#joy').hidden = $('#btnJump').hidden = $('#btnEmote').hidden = !isTouch;
+  $('#btnPeople').hidden = $('#helpChat').hidden = !net.on;
+  if(net.on && $('#chat').hidden && $('#chatOpen').hidden) setChatOpen(!isTouch);
   currentRoom = null; resize(); canvas.focus();
+  if(net.on) netEnter();
 }
+function doEmote(type){ if(!player || modalOpen()) return; playEmote(player, type); if(net.on) netEmote(type); $('#emotes').classList.remove('open'); }
+$('#emotes').innerHTML = EMOTES.map(([k,label],i) => `<button type="button" data-em="${k}"><kbd>${i+1}</kbd>${label}</button>`).join('');
+$('#emotes').addEventListener('click', e => { const b = e.target.closest('[data-em]'); if(b) doEmote(b.dataset.em); });
+$('#btnEmote').addEventListener('click', () => $('#emotes').classList.toggle('open'));
 function openCreator(){ mode = 'creator'; $('#hud').hidden = true; $('#creator').hidden = false; closeModal(); renderFields(); refreshPreview(); resize(); }
 
 addEventListener('keydown', e => {
   if(e.target.closest && e.target.closest('input,textarea')) { if(e.key==='Escape') closeModal(); return; }
   if(e.key==='Escape'){ closeModal(); return; }
   if(mode!=='world' || modalOpen()) return;
+  if(e.code==='Enter' && net.on){ setChatOpen(true); $('#chatIn').focus(); keys.clear(); e.preventDefault(); return; }
+  const dn = /^Digit([1-5])$/.exec(e.code); if(dn){ doEmote(EMOTES[+dn[1]-1][0]); return; }
   keys.add(e.code);
   if(e.code==='KeyE' || e.code==='Enter') interact();
   if(e.code==='Space'){ jump(); e.preventDefault(); }
@@ -868,6 +1070,7 @@ function clickWorld(e){
   const hits = ray.intersectObjects(clickables.map(c=>c.obj), true); if(!hits.length) return;
   let o = hits[0].object; let c = null; while(o && !c){ c = clickables.find(k => k.obj===o); o = o.parent; }
   if(!c) return;
+  if(c.kind==='person'){ startDm(c.uid); return; }
   if(c.kind==='npc'){ if(player.position.distanceTo(npc.position) < 8) openHelpDesk(); else setGuide({front:new THREE.Vector3(4.2,0,3), label:'안내 데스크'}); return; }
   const st = c.st; if(player.position.distanceTo(st.front) < 8) openStation(st); else { setGuide(st); toast('길 안내를 시작해요', `${ROOMS[st.room].full} › ${st.title}`); }
 }
@@ -884,7 +1087,7 @@ $('#prompt').addEventListener('click', interact);
 $('#helpOk').addEventListener('click', () => { $('#help').hidden = true; store.set('mc.helpSeen', true); });
 $('#guideX').addEventListener('click', () => setGuide(null));
 $('#sampleChip').addEventListener('click', openSettings);
-document.querySelectorAll('[data-ui]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.ui; if(k==='search') openSearch(); else if(k==='data') openSettings(); else openCreator(); }));
+document.querySelectorAll('[data-ui]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.ui; if(k==='search') openSearch(); else if(k==='data') openSettings(); else if(k==='people') openPeople(); else openCreator(); }));
 
 function interact(){ if(modalOpen()) return; if(nearStation) openStation(nearStation); else if(nearNpc) openHelpDesk(); }
 function setGuide(t){ guideTarget = t; beacon.visible = !!t; if(t) beacon.position.set(t.front.x,0,t.front.z); $('#guide').hidden = !t; }
@@ -1007,6 +1210,225 @@ mini.addEventListener('click', e => {
 /* =========================================================
    11. 루프
    ========================================================= */
+/* =========================================================
+   10-b. 함께 접속 · 채팅 (Firebase Realtime Database)
+   config.json 에 firebase 설정이 있을 때만 켜진다
+   ========================================================= */
+const net = {on:false, fb:null, db:null, auth:null, uid:null, email:'', allow:null, inWorld:false, subscribed:false,
+  remotes:new Map(), users:{}, lastSend:0, sent:'', tab:'all', dmWith:null, msgs:{}, unread:{}, dmNames:{}, dmSubs:new Set(), bubbles:[]};
+const FB_VER = '10.12.2';
+const emailKey = e => String(e||'').trim().toLowerCase().replace(/\./g, ',');
+const pairKey = (a,b) => [a,b].sort().join('_');
+const MONTH = 30*864e5;
+
+async function startOnline(cfg){
+  mode = 'gate'; $('#gate').hidden = false; gateMsg('서버에 연결하는 중…'); $('#btnLogin').disabled = true;
+  try{
+    const base = `https://www.gstatic.com/firebasejs/${FB_VER}/`;
+    const [A, U, D] = await Promise.all([import(base+'firebase-app.js'), import(base+'firebase-auth.js'), import(base+'firebase-database.js')]);
+    net.fb = {...A, ...U, ...D};
+    const app = A.initializeApp(cfg); net.auth = U.getAuth(app); net.db = D.getDatabase(app);
+    try{ await U.getRedirectResult(net.auth); }catch(e){}
+    const u = await new Promise(res => { const off = U.onAuthStateChanged(net.auth, x => { off(); res(x); }); });
+    $('#btnLogin').disabled = false;
+    if(u) await afterLogin(u); else gateMsg('');
+  }catch(e){ $('#btnLogin').disabled = false; gateMsg('서버에 연결하지 못했어요. 인터넷 연결을 확인하고 새로고침해 주세요.'); console.error(e); }
+}
+function gateMsg(t){ $('#gateMsg').textContent = t; }
+$('#btnLogin').addEventListener('click', async () => {
+  if(!net.auth) return; const {GoogleAuthProvider, signInWithPopup, signInWithRedirect} = net.fb;
+  const p = new GoogleAuthProvider(); p.setCustomParameters({prompt:'select_account'});
+  gateMsg('구글 로그인 창을 여는 중…');
+  try{ const r = await signInWithPopup(net.auth, p); await afterLogin(r.user); }
+  catch(e){ if(/popup-blocked|operation-not-supported|web-storage/.test(e.code||'')) signInWithRedirect(net.auth, p); else gateMsg(e.code==='auth/popup-closed-by-user' ? '' : '로그인하지 못했어요: ' + (e.code||e.message)); }
+});
+$('#btnLogout').addEventListener('click', async () => { try{ await net.fb.signOut(net.auth); }catch(e){} $('#btnLogout').hidden = true; gateMsg(''); });
+async function afterLogin(u){
+  const {ref, get} = net.fb;
+  gateMsg('직원 명단을 확인하는 중…');
+  let allow = null;
+  try{ const s = await get(ref(net.db, 'allow/' + emailKey(u.email))); allow = s.exists() ? s.val() : null; }catch(e){ allow = null; }
+  if(!allow){ gateMsg(`${u.email} 계정은 아직 직원 명단에 없어요. 관리자에게 이 메일 주소로 등록을 요청해 주세요.`); $('#btnLogout').hidden = false; return; }
+  net.uid = u.uid; net.email = u.email; net.allow = allow;
+  let mine = null; try{ const s = await get(ref(net.db, 'users/' + u.uid)); mine = s.exists() ? s.val() : null; }catch(e){}
+  if(mine && mine.avatar){ avatar = normAvatar(mine.avatar); presetNotice = false; }
+  else { avatar = normAvatar({...(allow.avatar||{}), name: allow.name||'', role: allow.role||'신인'}); presetNotice = !!allow.avatar; }
+  net.on = true; $('#gate').hidden = true; gateMsg(''); openCreator();
+}
+function presenceState(){ const p = player.position; return {x:+p.x.toFixed(2), z:+p.z.toFixed(2), yaw:+player.rotation.y.toFixed(2), room: currentRoom ? currentRoom.id : ''}; }
+function netEnter(){
+  const {ref, set, onDisconnect, serverTimestamp, onValue} = net.fb;
+  set(ref(net.db, 'users/' + net.uid), {name:avatar.name, role:avatar.role, team:net.allow.team||'', avatar, t:serverTimestamp()}).catch(e => console.warn(e));
+  const putPresence = () => { const pref = ref(net.db, 'presence/' + net.uid);
+    onDisconnect(pref).remove().then(() => set(pref, {name:avatar.name, role:avatar.role, avatar, ...presenceState(), mv:false, em:'', emT:0, t:serverTimestamp()})).catch(e => console.warn(e)); };
+  net.inWorld = true; putPresence();
+  if(!net.subscribed){
+    net.subscribed = true;
+    let first = true; onValue(ref(net.db, '.info/connected'), s => { if(s.val() && !first && net.inWorld) putPresence(); first = false; });
+    subscribePresence(); subscribeChat(); subscribeUsers(); cleanupOld();
+  }
+}
+function netTick(dt, moving){
+  // 내 위치 보내기 (초당 6번, 바뀐 게 있을 때만)
+  if(T - net.lastSend > .16){
+    const st = {...presenceState(), mv:moving}; const key = JSON.stringify(st);
+    if(key !== net.sent){ net.sent = key; net.lastSend = T; net.fb.update(net.fb.ref(net.db, 'presence/' + net.uid), {...st, t:net.fb.serverTimestamp()}).catch(()=>{}); }
+  }
+  // 다른 직원 보간
+  const k = 1-Math.exp(-10*dt);
+  for(const r of net.remotes.values()){
+    const ch = r.ch, dx = r.tx-ch.position.x, dz = r.tz-ch.position.z, d = Math.hypot(dx,dz);
+    if(d > 12){ ch.position.set(r.tx,0,r.tz); } else { ch.position.x += dx*k; ch.position.z += dz*k; }
+    ch.rotation.y = lerpAngle(ch.rotation.y, r.tyaw, k);
+    animateChar(ch, dt, r.mv || d > .08, 4.6, T + r.seed);
+  }
+  // 말풍선 수명
+  for(let i=net.bubbles.length-1;i>=0;i--){ const b = net.bubbles[i]; b.life -= dt; if(b.life < .5) b.sp.material.opacity = b.life*2;
+    if(b.life <= 0){ b.ch.remove(b.sp); b.sp.material.map.dispose(); net.bubbles.splice(i,1); } }
+}
+function netEmote(type){ net.fb.update(net.fb.ref(net.db, 'presence/' + net.uid), {em:type, emT:Date.now()}).catch(()=>{}); }
+function subscribePresence(){
+  const {ref, onChildAdded, onChildChanged, onChildRemoved} = net.fb; const r = ref(net.db, 'presence');
+  onChildAdded(r, s => upsertRemote(s.key, s.val())); onChildChanged(r, s => upsertRemote(s.key, s.val())); onChildRemoved(r, s => removeRemote(s.key));
+}
+function upsertRemote(uid, v){
+  if(uid === net.uid || !v || !worldBuilt) return;
+  let r = net.remotes.get(uid); const avKey = JSON.stringify(v.avatar||{}) + (v.name||'') + (v.role||'');
+  if(!r || r.avKey !== avKey){
+    const av = normAvatar(v.avatar); const ch = buildCharacter(av); ch.add(nameTag(v.name||'직원', v.role||'', tagY(av)));
+    if(r){ ch.position.copy(r.ch.position); ch.rotation.y = r.ch.rotation.y; scene.remove(r.ch); } else { ch.position.set(v.x||0,0,v.z||0); ch.rotation.y = v.yaw||0; }
+    scene.add(ch); clickables.push({obj:ch, kind:'person', uid});
+    if(r){ const i = clickables.findIndex(c => c.obj===r.ch); if(i>=0) clickables.splice(i,1); }
+    r = {ch, avKey, seed:Math.random()*10, emT:v.emT||0}; net.remotes.set(uid, r);
+  }
+  r.v = v; r.tx = v.x||0; r.tz = v.z||0; r.tyaw = v.yaw||0; r.mv = !!v.mv;
+  if(v.emT && v.emT !== r.emT){ r.emT = v.emT; if(v.em && Math.abs(Date.now()-v.emT) < 8000) playEmote(r.ch, v.em); }
+  updateOnline();
+}
+function removeRemote(uid){ const r = net.remotes.get(uid); if(!r) return; scene.remove(r.ch); const i = clickables.findIndex(c => c.obj===r.ch); if(i>=0) clickables.splice(i,1); net.remotes.delete(uid); updateOnline(); }
+function updateOnline(){ $('#onlineCount').textContent = String(net.remotes.size + 1); }
+function subscribeUsers(){ net.fb.onValue(net.fb.ref(net.db, 'users'), s => { net.users = s.val() || {}; }); }
+
+/* --- 말풍선 */
+function bubble(ch, text){
+  for(let i=net.bubbles.length-1;i>=0;i--) if(net.bubbles[i].ch===ch){ ch.remove(net.bubbles[i].sp); net.bubbles.splice(i,1); }
+  const lines = []; let cur = ''; for(const c of text.slice(0,60)){ cur += c; if(cur.length >= 16){ lines.push(cur); cur = ''; } } if(cur) lines.push(cur); if(lines.length > 3){ lines.length = 3; lines[2] = lines[2].slice(0,14) + '…'; }
+  const W = 512, Hh = 70 + lines.length*58;
+  const tex = canvasTex(W, Hh+30, (x) => { x.fillStyle = '#ffffff'; rr(x,4,4,W-8,Hh,30); x.fill(); x.beginPath(); x.moveTo(W/2-20,Hh+2); x.lineTo(W/2,Hh+28); x.lineTo(W/2+20,Hh+2); x.fill();
+    x.fillStyle = '#151925'; x.font = '500 44px "Noto Sans KR", sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; lines.forEach((l,i) => x.fillText(l, W/2, 40+29+i*58-((lines.length-1)*0)) ); });
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:tex, transparent:true, depthTest:false})); sp.renderOrder = 12;
+  const sc = 2.2; sp.scale.set(sc, sc*(Hh+30)/W, 1); sp.position.y = tagY(ch.userData.av||{}) + .45 + sp.scale.y/2; ch.add(sp);
+  net.bubbles.push({ch, sp, life:6});
+}
+
+/* --- 채팅 */
+const CH_ROOMS = ['lobby','art','toon','novel'];
+function subscribeChat(){
+  const {ref, query, orderByChild, limitToLast, onChildAdded} = net.fb;
+  const listen = (path, key) => onChildAdded(query(ref(net.db, path), orderByChild('t'), limitToLast(60)), s => onMsg(key, s.key, s.val()));
+  listen('chat/all', 'all'); CH_ROOMS.forEach(r => listen('chat/room_' + r, 'room_' + r));
+  const inbox = ref(net.db, 'inbox/' + net.uid);
+  onChildAdded(inbox, s => openDmChannel(s.key, (s.val()||{}).name));
+}
+function openDmChannel(other, name){
+  if(name) net.dmNames[other] = name;
+  if(net.dmSubs.has(other)) return; net.dmSubs.add(other);
+  const {ref, query, orderByChild, limitToLast, onChildAdded} = net.fb;
+  onChildAdded(query(ref(net.db, 'dm/' + pairKey(net.uid, other)), orderByChild('t'), limitToLast(60)), s => onMsg('dm:' + other, s.key, s.val()));
+  renderDmBar();
+}
+function curKey(){ if(net.tab==='all') return 'all'; if(net.tab==='room') return 'room_' + (currentRoom ? currentRoom.id : 'lobby'); return net.dmWith ? 'dm:' + net.dmWith : null; }
+function onMsg(key, id, m){
+  if(!m) return; const list = (net.msgs[key] ||= []); if(list.some(x => x.id===id)) return;
+  list.push({id, ...m}); list.sort((a,b) => (a.t||0)-(b.t||0)); if(list.length > 80) list.shift();
+  const fresh = Math.abs(Date.now() - (m.t||Date.now())) < 20000, mine = m.uid === net.uid;
+  if(fresh && !mine){
+    if(key==='all' || key==='room_' + (currentRoom ? currentRoom.id : '')){ const r = net.remotes.get(m.uid); if(r) bubble(r.ch, m.text); }
+    if(key.startsWith('dm:') && !(net.tab==='dm' && net.dmWith===m.uid && !$('#chat').hidden)) toast(`${m.name}님의 1:1 메시지`, m.text.slice(0,30));
+  }
+  const visible = !$('#chat').hidden && curKey() === key;
+  if(fresh && !mine && !visible){ net.unread[key] = (net.unread[key]||0) + 1; }
+  if(visible) renderLog(); renderBadges();
+}
+function renderBadges(){
+  const sum = pre => Object.entries(net.unread).filter(([k]) => k.startsWith(pre)).reduce((a,[,v]) => a+v, 0);
+  const all = net.unread.all||0, room = net.unread['room_' + (currentRoom ? currentRoom.id : 'lobby')]||0, dm = sum('dm:');
+  $('#ub-all').textContent = all || ''; $('#ub-room').textContent = room || ''; $('#ub-dm').textContent = dm || '';
+  $('#chatBadge').textContent = (all+room+dm) || '';
+  renderDmBar(true);
+}
+function renderLog(){
+  const key = curKey(), log = $('#chatLog');
+  if(!key){ log.innerHTML = '<li class="sys">대화할 사람을 위에서 고르거나, 오른쪽 위 <b>직원</b> 버튼에서 1:1 대화를 시작하세요.</li>'; return; }
+  net.unread[key] = 0;
+  const list = net.msgs[key] || [];
+  const tm = t => t ? new Date(t).toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}) : '';
+  const head = net.tab==='room' ? `<li class="sys">${esc(currentRoom ? currentRoom.full : '로비')}에 있는 사람끼리만 보여요.</li>` : net.tab==='all' ? '<li class="sys">캠퍼스 전체에 보이는 대화예요. 30일이 지난 대화는 지워져요.</li>' : '';
+  log.innerHTML = head + list.map(m => { const u = net.users[m.uid]; const col = roleColor(u ? u.role : ''); return `<li><b style="color:${col}">${esc(m.name)}</b>${esc(m.text)}<time>${tm(m.t)}</time></li>`; }).join('');
+  log.scrollTop = log.scrollHeight; renderBadges();
+}
+function renderDmBar(onlyBadges){
+  const bar = $('#dmBar'); bar.hidden = net.tab !== 'dm';
+  if(net.tab !== 'dm') return;
+  const ids = [...net.dmSubs];
+  bar.innerHTML = ids.length ? ids.map(id => { const n = net.dmNames[id] || (net.users[id]||{}).name || '직원'; const u = net.unread['dm:'+id]||0; return `<button type="button" data-dm="${esc(id)}" aria-pressed="${net.dmWith===id}">${esc(n)}${u?`<span class="badge">${u}</span>`:''}</button>`; }).join('') : '<span class="sys" style="font-size:12px;color:var(--muted)">아직 1:1 대화가 없어요</span>';
+}
+function setChatOpen(open){ $('#chat').hidden = !open; $('#chatOpen').hidden = open; if(open) renderLog(); }
+function setTab(tab){ net.tab = tab; document.querySelectorAll('.chat-tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab===tab))); renderDmBar(); renderLog(); }
+document.querySelector('.chat-tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if(b) setTab(b.dataset.tab); });
+$('#dmBar').addEventListener('click', e => { const b = e.target.closest('[data-dm]'); if(b){ net.dmWith = b.dataset.dm; renderDmBar(); renderLog(); } });
+$('#chatMin').addEventListener('click', () => { setChatOpen(false); canvas.focus(); });
+$('#chatOpen').addEventListener('click', () => setChatOpen(true));
+$('#chatIn').addEventListener('focus', () => keys.clear());
+$('#chatIn').addEventListener('keydown', e => { if(e.key==='Escape'){ e.target.blur(); canvas.focus(); e.stopPropagation(); } });
+$('#chatForm').addEventListener('submit', e => { e.preventDefault(); const inp = $('#chatIn'); const text = inp.value.trim(); if(!text) { inp.blur(); canvas.focus(); return; } inp.value = ''; sendChat(text); });
+function startDm(uid){ const u = net.users[uid] || {}; const r = net.remotes.get(uid); net.dmNames[uid] = u.name || (r && r.v.name) || '직원'; openDmChannel(uid); net.dmWith = uid; closeModal(); setChatOpen(true); setTab('dm'); setTimeout(() => $('#chatIn').focus(), 50); }
+async function sendChat(text){
+  if(!net.on) return; text = text.slice(0,300);
+  const {ref, push, set, serverTimestamp} = net.fb;
+  const m = {uid:net.uid, name:avatar.name, text, t:serverTimestamp()};
+  try{
+    if(net.tab==='dm'){
+      if(!net.dmWith){ toast('대화할 사람을 먼저 골라 주세요'); return; }
+      const other = net.dmWith;
+      await push(ref(net.db, 'dm/' + pairKey(net.uid, other)), m);
+      set(ref(net.db, `inbox/${other}/${net.uid}`), {name:avatar.name, t:serverTimestamp()});
+      set(ref(net.db, `inbox/${net.uid}/${other}`), {name:net.dmNames[other]||'직원', t:serverTimestamp()});
+    } else {
+      const path = net.tab==='all' ? 'chat/all' : 'chat/room_' + (currentRoom ? currentRoom.id : 'lobby');
+      await push(ref(net.db, path), m); bubble(player, text);
+    }
+  }catch(e){ toast('메시지를 보내지 못했어요', '잠시 뒤 다시 시도해 주세요'); console.warn(e); }
+}
+async function cleanupOld(){
+  const {ref, query, orderByChild, endAt, limitToFirst, get, remove} = net.fb;
+  for(const p of ['chat/all', ...CH_ROOMS.map(r => 'chat/room_' + r)]){
+    try{ const s = await get(query(ref(net.db, p), orderByChild('t'), endAt(Date.now() - MONTH), limitToFirst(100))); s.forEach(c => { remove(c.ref).catch(()=>{}); }); }catch(e){}
+  }
+}
+
+/* --- 직원 목록 */
+function openPeople(){
+  const online = new Set([net.uid, ...net.remotes.keys()]);
+  const ids = [...new Set([...Object.keys(net.users), ...online])];
+  ids.sort((a,b) => (online.has(b)-online.has(a)) || String((net.users[a]||{}).name).localeCompare(String((net.users[b]||{}).name),'ko'));
+  const row = id => { const u = net.users[id] || {}; const r = net.remotes.get(id); const on = online.has(id); const me = id===net.uid;
+    const name = me ? avatar.name : (r ? r.v.name : u.name) || '직원'; const room = me ? currentRoom : (r && r.v.room ? ROOMS[r.v.room] : null);
+    return `<li class="person"><span class="${on?'on':'off'}"></span><div><b>${esc(name)}${me?' (나)':''}</b><div class="sub">${esc((u.role||(r&&r.v.role)||''))}${u.team?' · '+esc(u.team):''}${on ? ' · ' + esc(room ? room.full : '접속 중') : ' · 오프라인'}</div></div>
+      <div class="f-act">${!me && on ? `<button class="btn sm ghost" data-action="visit" data-uid="${esc(id)}" type="button">찾아가기</button>` : ''}${!me ? `<button class="btn sm primary" data-action="dm" data-uid="${esc(id)}" type="button">1:1 대화</button>` : ''}</div></li>`; };
+  openModal(`<header class="m-head"><p class="m-eyebrow">직원</p><h2>지금 ${online.size}명이 캠퍼스에 있어요</h2><p class="m-sub">한 번이라도 들어온 직원은 오프라인이어도 1:1 메시지를 남길 수 있어요.</p></header>
+    <div class="m-body"><ul class="people">${ids.map(row).join('')}</ul><div class="set-row"><button class="btn sm ghost" data-action="logout" type="button">로그아웃</button></div></div>`);
+}
+function visit(uid){
+  const r = net.remotes.get(uid); if(!r) return; closeModal();
+  const {x, z} = r.ch.position; for(const [ox,oz] of [[1.3,0],[-1.3,0],[0,1.3],[0,-1.3],[0,0]]){ if(!collides(x+ox,z+oz)){ teleport(x+ox, z+oz, Math.atan2(-ox,-oz)); break; } }
+}
+$('#modalBody').addEventListener('click', async e => {
+  const b = e.target.closest('[data-action]'); if(!b) return; const a = b.dataset.action;
+  if(a==='dm') startDm(b.dataset.uid); else if(a==='visit') visit(b.dataset.uid);
+  else if(a==='logout'){ try{ if(net.uid) await net.fb.remove(net.fb.ref(net.db, 'presence/' + net.uid)); await net.fb.signOut(net.auth); }catch(err){} location.reload(); }
+});
+
 function resize(){
   const w = innerWidth, h = innerHeight; renderer.setSize(w,h,false);
   wCam.aspect = w/h; wCam.updateProjectionMatrix();
@@ -1022,7 +1444,8 @@ function updateCreator(dt){
   previewChar.rotation.y += (previewYaw-previewChar.rotation.y)*Math.min(1,dt*10);
   hop = Math.max(0,hop-dt*3.2); previewChar.position.y = Math.sin((1-hop)*Math.PI)*hop*.25;
   animateChar(previewChar, dt, false, 0, T);
-  const u = previewChar.userData; u.armR.rotation.z = (Math.sin(T*.8) > .7) ? -2.4 + Math.sin(T*12)*.3 : u.armR.rotation.z*.9;
+  if(!previewChar.userData.emote && (T % 9) < dt) playEmote(previewChar, 'wave');
+  updateFx(dt);
   turnRing.material.color.set(roleColor(avatar.role));
 }
 function updateWorld(dt){
@@ -1058,7 +1481,8 @@ function updateWorld(dt){
   wCam.position.lerp(camPos, camSnap ? 1 : 1-Math.exp(-14*dt)); camSnap = false; wCam.lookAt(tgt);
   // 방 감지
   const room = roomAt(player.position.x, player.position.z);
-  if(room && room!==currentRoom){ const first = currentRoom===null; currentRoom = room; $('#roomPill').textContent = room.full; $('#roomPill').style.background = room.color; if(!first) toast(room.full, room.desc); else toast('아트캠퍼스에 오신 걸 환영해요', '안내 데스크의 하나에게 말을 걸어 보세요'); }
+  if(room && room!==currentRoom){ const first = currentRoom===null; currentRoom = room; $('#roomPill').textContent = room.full; $('#roomPill').style.background = room.color; if(!first) toast(room.full, room.desc); else toast('아트캠퍼스에 오신 걸 환영해요', '안내 데스크의 하나에게 말을 걸어 보세요');
+    if(net.on){ if(net.tab==='room' && !$('#chat').hidden) renderLog(); else renderBadges(); } }
   // 가까운 책장
   nearStation = null; let best = 2.0;
   for(const st of stations){ const dd = Math.hypot(player.position.x-st.front.x, player.position.z-st.front.z); if(dd < best){ best = dd; nearStation = st; } }
@@ -1078,6 +1502,8 @@ function updateWorld(dt){
     $('#guideText').textContent = `${guideTarget.room?ROOMS[guideTarget.room].full+' › ':''}${guideTarget.title||guideTarget.label} · ${Math.round(dist)}m`;
     if(dist < 1.6){ const g = guideTarget; setGuide(null); if(g.files) toast('도착했어요', `${g.title} 책장`); }
   }
+  updateFx(dt);
+  if(net.on) netTick(dt, moving && onGround);
   if(poofT < 1){ poofT += dt*2.2; poof.scale.setScalar(1+poofT*3); poof.material.opacity = (1-poofT)*.9; }
   drawMini(T);
 }
@@ -1085,6 +1511,7 @@ function loop(){
   requestAnimationFrame(loop);
   const dt = Math.min(clock.getDelta(), .05); T += dt;
   if(mode==='creator'){ updateCreator(dt); renderer.render(cScene, cCam); }
+  else if(mode==='gate'){ turnRing.rotation.z += dt*.3; renderer.render(cScene, cCam); }
   else if(mode==='world'){ updateWorld(dt); renderer.render(scene, wCam); }
 }
 
@@ -1093,9 +1520,12 @@ function loop(){
    ========================================================= */
 (async () => {
   try{ await Promise.race([Promise.all([document.fonts.load('64px "Do Hyeon"'), document.fonts.load('700 40px "Noto Sans KR"')]), new Promise(r=>setTimeout(r,2500))]); }catch(e){}
-  bootCatalog();
+  const cfg = await loadConfig();
+  bootCatalog(cfg);
   $('#loading').style.opacity = 0; setTimeout(()=>$('#loading').remove(), 400);
-  openCreator(); loop();
+  loop();
+  if(cfg.firebase && cfg.firebase.apiKey && location.protocol.startsWith('http')) startOnline(cfg.firebase);
+  else openCreator();
 })();
 </script>
 </body>
