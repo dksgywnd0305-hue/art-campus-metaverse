@@ -43,6 +43,11 @@
       }
     },
 
+    "control": {
+      ".read": "auth != null && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()",
+      ".write": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).child('admin').val() == true"
+    },
+
     "inbox": {
       "$uid": {
         ".read": "auth != null && auth.uid == $uid",

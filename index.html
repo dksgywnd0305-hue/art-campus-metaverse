@@ -300,6 +300,16 @@ kbd{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 
   <button class="act" id="btnAct" type="button" hidden>열람</button>
 </div>
 
+<!-- 자동 퇴장 / 관리자 퇴장 -->
+<section id="nap" class="gate" hidden style="z-index:15;background:rgba(10,12,20,.55)">
+  <div class="gate-card">
+    <p class="eyebrow">퇴장</p>
+    <h1>잠시 나와 있어요</h1>
+    <p class="sub" id="napMsg"></p>
+    <button class="btn primary" id="btnWake" type="button">다시 입장</button>
+  </div>
+</section>
+
 <div class="modal-back" id="modalBack" hidden>
   <div class="modal" id="modal" role="dialog" aria-modal="true">
     <button class="m-close" id="modalClose" type="button" aria-label="닫기">✕</button>
@@ -1214,7 +1224,7 @@ mini.addEventListener('click', e => {
    10-b. 함께 접속 · 채팅 (Firebase Realtime Database)
    config.json 에 firebase 설정이 있을 때만 켜진다
    ========================================================= */
-const net = {on:false, fb:null, db:null, auth:null, uid:null, email:'', allow:null, inWorld:false, subscribed:false,
+const net = {on:false, fb:null, db:null, auth:null, uid:null, email:'', allow:null, inWorld:false, subscribed:false, offset:0, joinedAt:0,
   remotes:new Map(), users:{}, lastSend:0, sent:'', tab:'all', dmWith:null, msgs:{}, unread:{}, dmNames:{}, dmSubs:new Set(), bubbles:[]};
 const FB_VER = '10.12.2';
 const emailKey = e => String(e||'').trim().toLowerCase().replace(/\./g, ',');
@@ -1261,14 +1271,42 @@ function netEnter(){
   set(ref(net.db, 'users/' + net.uid), {name:avatar.name, role:avatar.role, team:net.allow.team||'', avatar, t:serverTimestamp()}).catch(e => console.warn(e));
   const putPresence = () => { const pref = ref(net.db, 'presence/' + net.uid);
     onDisconnect(pref).remove().then(() => set(pref, {name:avatar.name, role:avatar.role, avatar, ...presenceState(), mv:false, em:'', emT:0, t:serverTimestamp()})).catch(e => console.warn(e)); };
-  net.inWorld = true; putPresence();
+  net.inWorld = true; net.joinedAt = Date.now() + net.offset; putPresence();
   if(!net.subscribed){
     net.subscribed = true;
-    let first = true; onValue(ref(net.db, '.info/connected'), s => { if(s.val() && !first && net.inWorld) putPresence(); first = false; });
+    let first = true; onValue(ref(net.db, '.info/connected'), s => { if(s.val() && !first && net.inWorld && !napping) putPresence(); first = false; });
+    onValue(ref(net.db, '.info/serverTimeOffset'), s => { net.offset = s.val() || 0; });
+    // 관리자 퇴장 신호: control/all(전원), control/kick/{uid}(개인)
+    onValue(ref(net.db, 'control'), s => { const c = s.val() || {}; const mine = (c.kick||{})[net.uid] || 0, all = net.allow.admin ? 0 : (c.all || 0);
+      if(Math.max(mine, all) > net.joinedAt && !napping) nap('관리자가 퇴장시켰어요. 필요하면 다시 입장할 수 있어요.'); });
     subscribePresence(); subscribeChat(); subscribeUsers(); cleanupOld();
   }
 }
+/* --- 자동 퇴장: 접속해 있으면 다른 사람 움직임을 계속 내려받아서 무료 사용량이 줄어든다 */
+const IDLE_MS = 5*60*1000, HIDDEN_MS = 2*60*1000;
+let lastAct = Date.now(), hiddenAt = 0, napping = false;
+['keydown','pointerdown','wheel','touchstart'].forEach(ev => addEventListener(ev, () => { lastAct = Date.now(); }, {passive:true, capture:true}));
+document.addEventListener('visibilitychange', () => { hiddenAt = document.hidden ? Date.now() : 0; if(!document.hidden) lastAct = Date.now(); });
+setInterval(() => {
+  if(!net.on || !net.inWorld || napping || mode!=='world') return;
+  const now = Date.now();
+  if(hiddenAt && now - hiddenAt > HIDDEN_MS) nap('창을 내려 둔 지 2분이 지나서 자동으로 퇴장했어요.');
+  else if(now - lastAct > IDLE_MS) nap('5분 동안 움직임이 없어서 자동으로 퇴장했어요.');
+}, 10000);
+function nap(msg){
+  napping = true; keys.clear(); joy.x = joy.y = 0; closeModal();
+  try{ net.fb.goOffline(net.db); }catch(e){}
+  for(const uid of [...net.remotes.keys()]) removeRemote(uid);
+  $('#napMsg').textContent = msg + ' 접속해 있는 동안에는 다른 사람의 움직임을 계속 받아서 무료 사용량이 줄어들어요.';
+  $('#nap').hidden = false;
+}
+$('#btnWake').addEventListener('click', () => {
+  napping = false; lastAct = Date.now(); hiddenAt = 0; net.joinedAt = Date.now() + net.offset; net.sent = '';
+  $('#nap').hidden = true; try{ net.fb.goOnline(net.db); }catch(e){} canvas.focus();
+  net.fb.get(net.fb.ref(net.db, 'presence')).then(s => s.forEach(c => { upsertRemote(c.key, c.val()); })).catch(()=>{});
+});
 function netTick(dt, moving){
+  if(napping) return;
   // 내 위치 보내기 (초당 6번, 바뀐 게 있을 때만)
   if(T - net.lastSend > .16){
     const st = {...presenceState(), mv:moving}; const key = JSON.stringify(st);
@@ -1415,9 +1453,11 @@ function openPeople(){
   const row = id => { const u = net.users[id] || {}; const r = net.remotes.get(id); const on = online.has(id); const me = id===net.uid;
     const name = me ? avatar.name : (r ? r.v.name : u.name) || '직원'; const room = me ? currentRoom : (r && r.v.room ? ROOMS[r.v.room] : null);
     return `<li class="person"><span class="${on?'on':'off'}"></span><div><b>${esc(name)}${me?' (나)':''}</b><div class="sub">${esc((u.role||(r&&r.v.role)||''))}${u.team?' · '+esc(u.team):''}${on ? ' · ' + esc(room ? room.full : '접속 중') : ' · 오프라인'}</div></div>
-      <div class="f-act">${!me && on ? `<button class="btn sm ghost" data-action="visit" data-uid="${esc(id)}" type="button">찾아가기</button>` : ''}${!me ? `<button class="btn sm primary" data-action="dm" data-uid="${esc(id)}" type="button">1:1 대화</button>` : ''}</div></li>`; };
+      <div class="f-act">${!me && on && net.allow.admin ? `<button class="btn sm ghost" data-action="kick" data-uid="${esc(id)}" type="button">퇴장</button>` : ''}${!me && on ? `<button class="btn sm ghost" data-action="visit" data-uid="${esc(id)}" type="button">찾아가기</button>` : ''}${!me ? `<button class="btn sm primary" data-action="dm" data-uid="${esc(id)}" type="button">1:1 대화</button>` : ''}</div></li>`; };
   openModal(`<header class="m-head"><p class="m-eyebrow">직원</p><h2>지금 ${online.size}명이 캠퍼스에 있어요</h2><p class="m-sub">한 번이라도 들어온 직원은 오프라인이어도 1:1 메시지를 남길 수 있어요.</p></header>
-    <div class="m-body"><ul class="people">${ids.map(row).join('')}</ul><div class="set-row"><button class="btn sm ghost" data-action="logout" type="button">로그아웃</button></div></div>`);
+    <div class="m-body"><ul class="people">${ids.map(row).join('')}</ul>
+    ${net.allow.admin ? '<p class="note">관리자 메뉴: 퇴장시킨 사람은 연결이 끊기고, 본인이 "다시 입장"을 눌러야 돌아와요. 5분 동안 조작이 없거나 창을 2분 넘게 내려 두면 자동으로도 퇴장돼요.</p>' : ''}
+    <div class="set-row">${net.allow.admin ? '<button class="btn sm" data-action="kickall" type="button">나 빼고 전원 퇴장</button>' : ''}<button class="btn sm ghost" data-action="logout" type="button">로그아웃</button></div><div class="msg" id="kickMsg" role="status"></div></div>`);
 }
 function visit(uid){
   const r = net.remotes.get(uid); if(!r) return; closeModal();
@@ -1425,6 +1465,13 @@ function visit(uid){
 }
 $('#modalBody').addEventListener('click', async e => {
   const b = e.target.closest('[data-action]'); if(!b) return; const a = b.dataset.action;
+  if(a==='kick' || a==='kickall'){
+    const {ref, set, serverTimestamp} = net.fb;
+    try{ await set(ref(net.db, a==='kick' ? 'control/kick/' + b.dataset.uid : 'control/all'), serverTimestamp());
+      if(a==='kick'){ b.disabled = true; b.textContent = '퇴장시킴'; } else $('#kickMsg').textContent = '접속 중인 다른 직원을 모두 퇴장시켰어요.'; }
+    catch(err){ $('#kickMsg').textContent = '퇴장시키지 못했어요. 관리자 권한을 확인해 주세요.'; }
+    return;
+  }
   if(a==='dm') startDm(b.dataset.uid); else if(a==='visit') visit(b.dataset.uid);
   else if(a==='logout'){ try{ if(net.uid) await net.fb.remove(net.fb.ref(net.db, 'presence/' + net.uid)); await net.fb.signOut(net.auth); }catch(err){} location.reload(); }
 });
