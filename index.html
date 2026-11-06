@@ -1266,9 +1266,10 @@ async function afterLogin(u){
   net.on = true; $('#gate').hidden = true; gateMsg(''); openCreator();
 }
 function presenceState(){ const p = player.position; return {x:+p.x.toFixed(2), z:+p.z.toFixed(2), yaw:+player.rotation.y.toFixed(2), room: currentRoom ? currentRoom.id : ''}; }
-function netEnter(){
+const CLIENT_V = 2;   // 서버 규칙이 이 값이 있는 사람에게만 위치 정보를 보낸다 (예전 버전 창 차단)
+async function netEnter(){
   const {ref, set, onDisconnect, serverTimestamp, onValue} = net.fb;
-  set(ref(net.db, 'users/' + net.uid), {name:avatar.name, role:avatar.role, team:net.allow.team||'', avatar, t:serverTimestamp()}).catch(e => console.warn(e));
+  try{ await set(ref(net.db, 'users/' + net.uid), {name:avatar.name, role:avatar.role, team:net.allow.team||'', avatar, v:CLIENT_V, t:serverTimestamp()}); }catch(e){ console.warn(e); }
   const putPresence = () => { const pref = ref(net.db, 'presence/' + net.uid);
     onDisconnect(pref).remove().then(() => set(pref, {name:avatar.name, role:avatar.role, avatar, ...presenceState(), mv:false, em:'', emT:0, t:serverTimestamp()})).catch(e => console.warn(e)); };
   net.inWorld = true; net.joinedAt = Date.now() + net.offset; putPresence();
@@ -1305,6 +1306,11 @@ $('#btnWake').addEventListener('click', () => {
   $('#nap').hidden = true; try{ net.fb.goOnline(net.db); }catch(e){} canvas.focus();
   net.fb.get(net.fb.ref(net.db, 'presence')).then(s => s.forEach(c => { upsertRemote(c.key, c.val()); })).catch(()=>{});
 });
+// 7분 넘게 소식이 없는 캐릭터는 창만 켜 둔 예전 접속으로 보고 숨긴다
+setInterval(() => {
+  if(!net.on || napping) return; const now = Date.now() + net.offset;
+  for(const [uid, r] of net.remotes) if(r.v && r.v.t && now - r.v.t > 7*60*1000) removeRemote(uid);
+}, 30000);
 function netTick(dt, moving){
   if(napping) return;
   // 내 위치 보내기 (초당 6번, 바뀐 게 있을 때만)
@@ -1331,6 +1337,7 @@ function subscribePresence(){
 }
 function upsertRemote(uid, v){
   if(uid === net.uid || !v || !worldBuilt) return;
+  if(v.t && Date.now() + net.offset - v.t > 7*60*1000){ removeRemote(uid); return; }
   let r = net.remotes.get(uid); const avKey = JSON.stringify(v.avatar||{}) + (v.name||'') + (v.role||'');
   if(!r || r.avKey !== avKey){
     const av = normAvatar(v.avatar); const ch = buildCharacter(av); ch.add(nameTag(v.name||'직원', v.role||'', tagY(av)));
