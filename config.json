@@ -1,10 +1,10 @@
 {
   "sheetCsvUrl": "",
   "firebase": {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "projectId": "",
-    "appId": ""
+    "apiKey": "AIzaSyAfMu9Ou8TZKmFoG4LIjmTDOAE5ddrOfUg",
+    "authDomain": "art-campus.firebaseapp.com",
+    "databaseURL": "https://art-campus-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "projectId": "art-campus",
+    "appId": "1:1060075068392:web:9f9333e63b6efa8535e25d"
   }
 }
