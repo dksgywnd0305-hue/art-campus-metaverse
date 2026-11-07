@@ -17,7 +17,7 @@
     },
 
     "presence": {
-      ".read": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()",
+      ".read": "auth != null && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists() && root.child('users').child(auth.uid).child('v').val() >= 2",
       "$uid": {
         ".write": "auth != null && auth.uid == $uid && auth.token.email_verified == true && root.child('allow').child(auth.token.email.toLowerCase().replace('.', ',')).exists()"
       }
